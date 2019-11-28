@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="card">
+    <div class="card-header">გაფილტვრა</div>
+    <div class="card-body">
+      <form asp-action="Index" method="get">
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label class="sr-only" for="personalNr">პირადი ნომერი</label>
+            <input type="text" name="personalNr" class="form-control mb-2" id="personalNr" placeholder="პირადი ნომერი" >
+          </div>
+          <div class="col-auto">
+            <label class="sr-only" for="bDateStart"> დაბადების თარიღი -დან</label>
+            <input type="text" name="bDateStart" class="form-control mb-2 datepicker" id="bDateStart" placeholder="თარიღი -დან">
+          </div>
+          <div class="col-auto">
+            <label class="sr-only" for="bDateEnd"> დაბადების თარიღი -დან</label>
+            <input type="text" name="bDateEnd" class="form-control mb-2 datepicker" id="bDateEnd" placeholder="თარიღი -მდე">
+          </div>
+
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">გაფილტვრა</button>
+            <button  class="btn btn-light mb-2">გასუფთავება</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

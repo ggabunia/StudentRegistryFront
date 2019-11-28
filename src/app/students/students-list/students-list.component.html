@@ -1,0 +1,49 @@
+<div class="row">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>
+        სახელი
+      </th>
+      <th>
+        გვარი
+      </th>
+      <th>
+        დაბადების თარიღი
+      </th>
+      <th>
+        პირადი ნომერი
+      </th>
+      <th>
+        სქესი
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let student of students;">
+        <td>
+            {{student.firstName}}
+        </td>
+        <td>
+           {{student.lastName}}
+        </td>
+        <td>
+           {{student.doB| date: 'yyyy-LL-dd' }}
+        </td>
+        <td>
+           {{student.pN}}
+        </td>
+        <td>
+            {{student.genderName}}
+        </td>
+        <td>
+            <button class="btn btn-secondary">რედაქტირება</button>
+
+            <button class="btn btn-danger">წაშლა</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
