@@ -22,7 +22,7 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let student of students;">
+    <tr *ngFor="let student of currentStudents| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
         <td>
             {{student.firstName}}
         </td>
@@ -30,7 +30,7 @@
            {{student.lastName}}
         </td>
         <td>
-           {{student.doB| date: 'yyyy-LL-dd' }}
+           {{student.doB| date: 'dd/LL/yyyy' }}
         </td>
         <td>
            {{student.pN}}
@@ -39,11 +39,15 @@
             {{student.genderName}}
         </td>
         <td>
-            <button class="btn btn-secondary">რედაქტირება</button>
+            <button class="btn btn-secondary" [routerLink]="['/edit',student.id]">რედაქტირება</button>
 
-            <button class="btn btn-danger">წაშლა</button>
+            <button class="btn btn-danger" (click)="onStudentDelete(student.id)">წაშლა</button>
         </td>
     </tr>
     </tbody>
   </table>
+  <ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="currentStudents.length"></ngb-pagination>
 </div>

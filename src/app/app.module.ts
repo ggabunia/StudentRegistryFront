@@ -9,6 +9,10 @@ import { StudentsListComponent } from './students/students-list/students-list.co
 import { StudentsSearchComponent } from './students/students-search/students-search.component';
 import { HeaderComponent } from './header/header.component';
 import { StudentEditComponent } from './students/student-edit/student-edit.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 @NgModule({
   declarations: [
@@ -20,6 +24,7 @@ import { StudentEditComponent } from './students/student-edit/student-edit.compo
     StudentEditComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,

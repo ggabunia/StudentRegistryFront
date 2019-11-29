@@ -2,15 +2,15 @@
   <div class="card">
     <div class="card-header">გაფილტვრა</div>
     <div class="card-body">
-      <form asp-action="Index" method="get">
+      <form>
         <div class="form-row align-items-center">
           <div class="col-auto">
             <label class="sr-only" for="personalNr">პირადი ნომერი</label>
-            <input type="text" name="personalNr" class="form-control mb-2" id="personalNr" placeholder="პირადი ნომერი" >
+            <input type="text" name="personalNr" class="form-control mb-2" id="personalNr" placeholder="პირადი ნომერი" [(ngModel)]="personalNr" >
           </div>
           <div class="col-auto">
             <label class="sr-only" for="bDateStart"> დაბადების თარიღი -დან</label>
-            <input type="text" name="bDateStart" class="form-control mb-2 datepicker" id="bDateStart" placeholder="თარიღი -დან">
+            <input type="text" name="bDateStart" class="form-control mb-2 datepicker" id="bDateStart" placeholder="თარიღი -დან" [(ngModel)]="startDate">
           </div>
           <div class="col-auto">
             <label class="sr-only" for="bDateEnd"> დაბადების თარიღი -დან</label>
@@ -18,8 +18,8 @@
           </div>
 
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-2">გაფილტვრა</button>
-            <button  class="btn btn-light mb-2">გასუფთავება</button>
+            <button type="submit" class="btn btn-primary mb-2" (click)="onFilter()">გაფილტვრა</button>
+            <button  class="btn btn-light mb-2" (click)="onFilterClear()">გასუფთავება</button>
           </div>
         </div>
       </form>

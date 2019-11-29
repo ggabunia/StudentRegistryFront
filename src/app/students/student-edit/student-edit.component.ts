@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {StudentsService} from '../../students.service';
 import {Student} from '../../student';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {GendersService} from '../../genders.service';
+import {Gender} from '../../gender';
 
 @Component({
   selector: 'app-student-edit',
@@ -10,17 +12,35 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class StudentEditComponent implements OnInit {
 
-  student: Student;
+  genders: Gender[];
+  student: Student = {
+    id: -1,
+    firstName: '',
+    lastName: '',
+    doB: null,
+    pN: '',
+    genderName: '',
+    genderId: 1
+  };
   id: number;
   editMode = false;
-  constructor(private studServ: StudentsService, private route: ActivatedRoute) { }
+  showErrors = false;
+  validationErrors: string[];
+  title = 'სტუდენტის დამატება';
+  constructor(private studServ: StudentsService,
+              private genderServ: GendersService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.genderServ.getGenders()
+      .subscribe(genders => this.genders = genders);
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params.id;
         this.editMode = params.id != null;
         if (this.editMode) {
+          this.title = 'სტუდენტის რედაქტირება';
           this.studServ.getStudent(this.id)
             .subscribe(student => this.student = student);
         }
@@ -28,4 +48,33 @@ export class StudentEditComponent implements OnInit {
     );
   }
 
+  onSubmit() {
+    this.student.genderId = +this.student.genderId;
+    if (this.editMode) {
+      this.studServ.updateStudent(this.id, this.student).subscribe(
+        (data) => {
+          if (data.statusCode === 400) {
+            if (data.errorsList !== null) {
+              this.validationErrors = data.errorsList;
+              this.showErrors = true;
+            }
+          }
+        }
+      );
+    } else {
+      this.studServ.addStudent(this.student).subscribe(
+        (data) => {
+          if (data.statusCode === 400) {
+            if (data.errorsList !== null) {
+              this.validationErrors = data.errorsList;
+              this.showErrors = true;
+            }
+          } else {
+            this.router.navigate(['/']);
+          }
+
+        }
+      );
+    }
+  }
 }
